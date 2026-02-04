@@ -186,7 +186,7 @@ void ImageViewer::on_pushButtonGenerate_clicked()
 
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::normal_distribution<double> dist(0.0, std::sqrt(dt));
+	std::normal_distribution<double> norm_dist(0.0, 1.0);
 
 	for (int i = 0; i < numTraj; i++) {
 		trajectories[i].resize(N + 1);
@@ -196,7 +196,7 @@ void ImageViewer::on_pushButtonGenerate_clicked()
 
 		for (int j = 1; j <= N; j++) {
 			double t = j * dt;
-			currentW += dist(gen);
+			currentW += std::sqrt(dt) * norm_dist(gen);
 
 			switch (processType) {
 			case 0: // Wiener process
